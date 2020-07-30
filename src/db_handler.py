@@ -1,7 +1,6 @@
 from typing import List
 
 
-
 class SingletonMeta(type):
     """
     The Singleton class can be implemented in different ways in Python. Some

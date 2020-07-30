@@ -1,16 +1,17 @@
-# Toy GraphDB
+# URL Shortner Service
+• As a user I want to create a new shortened URL
+• As a user I want to view the details of a shortened URL
+• As a user I want to see all shortened URLs that have been created
+• As a user I want my shortened URL to redirect to the original URL
 
-Just a toy graph db so that we can play around with graph algorithms 
 
 # Aim
 
 Use Cases I want to test out with this
-1. Use a DAG of currency conversion to find how we can make money by doing rapid currency conversion AKA
-Given a grid of currency conversion , between few currencies find Eulerian circuit 
-that has to get X% over money over what I started.  
-2. Find degree of friendship
-3. For Grid : load a image as grid and find components in it, aka edge detection
-
+1. PROTOBUF and GRPC based api
+2. REST/JSON 
+3. MYSQL ??
+4. 
 # DB performance
 
 Writing
@@ -23,9 +24,7 @@ Writing
 
 
 
-# Task List
-https://github.com/shashanksingh/toy_graph_db/projects/1
-
+# Features
 
 
 

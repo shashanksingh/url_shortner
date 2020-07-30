@@ -26,7 +26,7 @@ class UrlShortnerServiceServicerProxy(UrlShortnerServiceServicer):
         pass
 
     def ping(self, request, context):
-        return Pong(message="ALl hail GRPC")
+        return Pong(message="Open the POD BAY ! HAL ")
 
     def create_short_url(self, request, context):
         pass
