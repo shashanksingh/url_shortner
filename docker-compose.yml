@@ -1,0 +1,21 @@
+#one nginx to foward proxy requests to our toy db instances
+# load a permanenent volume that all toy db will write and read from
+
+version: '3.3'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: url_shortner.Dockerfile
+    ports:
+      - "9090:9090"
+    volumes:
+      - .:/url_shortner
+#  proxy:
+#    build:
+#      context: .
+#      dockerfile: envoy.Dockerfile
+#    depends_on:
+#      - db
+#    ports:
+#      - "8080:8080"

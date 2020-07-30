@@ -1,0 +1,5 @@
+-User Requirements:
+# As a user I want to create a new shortened URL
+# As a user I want to view the details of a shortened URL
+# As a user I want to see all shortened URLs that have been created
+# As a user I want my shortened URL to redirect to the original URL
