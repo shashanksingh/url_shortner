@@ -1,6 +1,5 @@
-#one nginx to foward proxy requests to our toy db instances
-# load a permanenent volume that all toy db will write and read from
-
+#THIS is development compose files
+#production one wont have user/password inside yml's
 version: '3.3'
 volumes:
   db-volume:

@@ -12,10 +12,10 @@ proto:
 
 build:
 	make proto
-	docker-compose up
+	docker-compose -f docker-compose.dev.yml up
 
 clean_build:
-	docker-compose down --remove-orphans
+	docker-compose -f docker-compose.dev.yml down --remove-orphans
 
 test:
 	pytest -sv tests/
