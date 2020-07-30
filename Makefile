@@ -14,6 +14,9 @@ build:
 	make proto
 	docker-compose up
 
+clean_build:
+	docker-compose down --remove-orphans
+
 test:
 	pytest -sv tests/
 
