@@ -11,7 +11,7 @@ proto:
 	2to3 src/generated -w -n
 
 build:
-	proto
+	make proto
 	docker-compose up
 
 test:
@@ -30,7 +30,7 @@ run_server:
 	python -m main
 
 run_client:
-	python -m clients.examples.create_grid
+	python -m clients.examples.create_short_urls
 
 .PHONY: freeze clean
 .SILENT: src_package

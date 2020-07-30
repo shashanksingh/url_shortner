@@ -39,7 +39,7 @@ message ShortUrl{
 }
 
 message LongUrl {
-
+  string url = 1;
 }
 
 message Error {
