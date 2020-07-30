@@ -11,7 +11,7 @@ import grpc
 from src.generated.url_shortner_service_pb2_grpc import (
     add_UrlShortnerServiceServicer_to_server,
 )
-from src.url_shortner_service_proxy import UrlShortnerServiceServicerProxy
+from src.url_shortner_service_controller import UrlShortnerServiceServicerController
 
 from concurrent import futures
 
@@ -20,7 +20,7 @@ PORT_EXPOSED = 9090
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    add_UrlShortnerServiceServicer_to_server(UrlShortnerServiceServicerProxy(), server)
+    add_UrlShortnerServiceServicer_to_server(UrlShortnerServiceServicerController(), server)
     server.add_insecure_port(f"[::]:{PORT_EXPOSED}")
     print(emoji.emojize(f"All systems go :rocket:"))
     server.start()

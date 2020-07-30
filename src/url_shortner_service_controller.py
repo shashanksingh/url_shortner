@@ -4,7 +4,7 @@ from src.generated.url_shortner_service_pb2 import Pong, Status, Success, ShortU
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 
 
-class UrlShortnerServiceServicerProxy(UrlShortnerServiceServicer):
+class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
         pass
 
