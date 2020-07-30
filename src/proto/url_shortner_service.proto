@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+service UrlShortnerService{
+
+  rpc ping (Empty) returns (Pong) {} // For Health Check fo service
+
+  rpc create_short_url (LongUrl) returns (ShortUrl) {} // Create Short Url
+
+  rpc get_short_url_details (ShortUrl) returns (ListOfShortUrlDetails) {} // Get Short Url Detailswith list of 1
+
+  rpc get_all_short_urls(Empty) returns (ListOfShortUrlDetails) {} // Get All short url
+}
+
+
+message Empty{
+
+}
+
+message Pong {
+  string message = 1;
+}
+
+
+message ShortUrlDetails {
+  string short_url = 1;
+  string created_at = 2;
+}
+
+message ListOfShortUrlDetails {
+  repeated ShortUrlDetails list_of_short_urls = 1;
+  Error error = 2;
+  Success success = 3;
+}
+
+message ShortUrl{
+  string short_url = 1;
+  Error error = 2;
+  Success success = 3;
+}
+
+message LongUrl {
+
+}
+
+message Error {
+  enum Code {
+    FAILED= 0;
+  }
+  Code code_number = 1;
+  string message = 2;
+}
+
+message Success {
+  enum Code {
+    ALL_GOOD= 0;
+  }
+  Code code_number = 1;
+  string message = 2;
+}
+
+//enums
+enum Status {
+    ALL_GOOD=0;
+    EVERYTHING_IS_FINE=1;
+    COOL_YOUR_JETS=2;
+    SOMETHING_WENT_WRONG=3;
+    QUERY_IS_INCORRECT=4;
+}
+
+
+
