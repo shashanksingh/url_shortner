@@ -14,7 +14,7 @@ from src.generated.url_shortner_service_pb2_grpc import (
 from src.url_shortner_service_controller import UrlShortnerServiceServicerController
 
 from concurrent import futures
-from src.Constants import Constants
+from src.constants import Constants
 
 
 def serve():

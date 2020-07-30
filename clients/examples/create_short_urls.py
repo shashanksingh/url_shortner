@@ -5,10 +5,10 @@ from src.generated.url_shortner_service_pb2 import (
     LongUrl,
 )
 
-PORT_EXPOSED = 9090
+from src.constants import Constants
 
 # open a gRPC channel
-channel = grpc.insecure_channel(f"localhost:{PORT_EXPOSED}")
+channel = grpc.insecure_channel(f"localhost:{Constants.PORT_EXPOSED}")
 
 # create a stub (client)
 stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
