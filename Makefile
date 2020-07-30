@@ -32,6 +32,7 @@ run_server:
 run_client:
 	python -m clients.examples.create_short_urls
 	python -m clients.examples.get_short_url_details
+	python -m clients.examples.get_all_short_urls
 
 .PHONY: freeze clean
 .SILENT: src_package
