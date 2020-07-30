@@ -8,34 +8,15 @@ import emoji
 
 # imports for the server
 import grpc
-from src.generated.url_shortner_service_pb2 import Pong, Status, Success
 from src.generated.url_shortner_service_pb2_grpc import (
-    UrlShortnerServiceServicer,
     add_UrlShortnerServiceServicer_to_server,
 )
-from src.generated import url_shortner_service_pb2 as url__shortner__service_pb2
+from src.url_shortner_service_proxy import UrlShortnerServiceServicerProxy
 
 import logging
 from concurrent import futures
 
 PORT_EXPOSED = 9090
-
-
-class UrlShortnerServiceServicerProxy(UrlShortnerServiceServicer):
-    def __init__(self):
-        pass
-
-    def ping(self, request, context):
-        return Pong(message="Open the POD BAY ! HAL     ")
-
-    def create_short_url(self, request, context):
-        pass
-
-    def get_short_url_details(self, request, context):
-        pass
-
-    def get_all_short_urls(self, request, context):
-        pass
 
 
 def serve():
