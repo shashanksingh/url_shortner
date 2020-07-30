@@ -1,6 +1,6 @@
 from google.protobuf.timestamp_pb2 import Timestamp
 
-from src.generated.url_shortner_service_pb2 import Pong, Status, Success, ShortUrl
+from src.generated.url_shortner_service_pb2 import Pong, Status, Success, ShortUrl, ShortUrlDetails
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 
 
@@ -12,7 +12,6 @@ class UrlShortnerServiceServicerProxy(UrlShortnerServiceServicer):
         return Pong(message="Open the POD BAY ! HAL")
 
     def create_short_url(self, request, context):
-        timestamp = Timestamp()
         return ShortUrl(
             short_url="https://domain_name/qwerty",
             error=None,
@@ -20,7 +19,10 @@ class UrlShortnerServiceServicerProxy(UrlShortnerServiceServicer):
         )
 
     def get_short_url_details(self, request, context):
-        pass
-
+        timestamp = Timestamp()
+        return ShortUrlDetails(
+            short_url="https://domain_name/qwerty",
+            created_at=timestamp.GetCurrentTime()
+        )
     def get_all_short_urls(self, request, context):
         pass
