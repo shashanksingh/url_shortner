@@ -2,15 +2,28 @@
 # load a permanenent volume that all toy db will write and read from
 
 version: '3.3'
+volumes:
+  db-volume:
 services:
   db:
+    image: library/mysql:8.0.21
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+    volumes:
+      - db-volume:/var/lib/mysql
+  service:
     build:
       context: .
       dockerfile: url_shortner.Dockerfile
     ports:
       - "9090:9090"
-    volumes:
-      - .:/url_shortner
 #  proxy:
 #    build:
 #      context: .
