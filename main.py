@@ -13,7 +13,6 @@ from src.generated.url_shortner_service_pb2_grpc import (
 )
 from src.url_shortner_service_proxy import UrlShortnerServiceServicerProxy
 
-import logging
 from concurrent import futures
 
 PORT_EXPOSED = 9090
@@ -29,6 +28,5 @@ def serve():
 
 
 if __name__ == "__main__":
-    logging.basicConfig()
     print(emoji.emojize(f"Running on port {PORT_EXPOSED} :thumbs_up:"))
     serve()
