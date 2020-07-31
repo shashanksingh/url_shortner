@@ -9,8 +9,8 @@ a Config server
 
 class ConstantYML:
     def __init__(self):
-        CONFIG_FILE = "config-dev.yml"
-        with open(CONFIG_FILE, "r") as stream:
+        config_file = "config-dev.yml"
+        with open(config_file, "r") as stream:
             try:
                 self.yml = yaml.safe_load(stream)
             except yaml.YAMLError as exc:
@@ -30,7 +30,8 @@ class Constants:
     RUNNING_ON_PORT = f"Running on port {PORT_EXPOSED} :thumbs_up:"
     OPEN_THE_POD_BAY_DOOR = "Open the POD BAY Door ! HAL"
     MAX_WORKERS_FOR_SERVER = 10
-    MYSQL_USER_NAME = ConstantYMLOBJECT.yml.MYSQL_USER_NAME
-    MYSQL_PASSWORD = ConstantYMLOBJECT.yml.MYSQL_PASSWORD
-    MYSQL_HOST = ConstantYMLOBJECT.yml.MYSQL_HOST
+    # print(ConstantYMLOBJECT.yml)
+    # MYSQL_USER_NAME = ConstantYMLOBJECT.yml.MYSQL_USER_NAME
+    # MYSQL_PASSWORD = ConstantYMLOBJECT.yml.MYSQL_PASSWORD
+    # MYSQL_HOST = ConstantYMLOBJECT.yml.MYSQL_HOST
     BASE_DOMAIN_FOR_REDIRECTION_SERVICE = "http://localhost:9091/"

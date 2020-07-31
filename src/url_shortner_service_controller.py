@@ -22,7 +22,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         if request.long_url:
             Url.create_short_url(long_url=request.long_url)
         return ShortUrl(
-            short_url="https://domain_name/qwerty",
+            short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
             error=None,
             success=Success(code_number=Success.Code.ALL_GOOD, message=None),
         )
@@ -33,7 +33,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response.list_of_short_urls.extend(
             [
                 ShortUrlDetails(
-                    short_url="https://domain_name/qwerty",
+                    short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
                     created_at=timestamp.GetCurrentTime(),
                 )
             ]
@@ -46,7 +46,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response.list_of_short_urls.extend(
             [
                 ShortUrlDetails(
-                    short_url="https://domain_name/qwerty",
+                    short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
                     created_at=timestamp.GetCurrentTime(),
                 )
             ]
