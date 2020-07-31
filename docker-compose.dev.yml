@@ -5,7 +5,7 @@ volumes:
   db-volume:
 services:
   database:
-    image: library/my sql:8.0.21
+    image: library/mysql:8.0.21
     restart: always
     environment:
       MYSQL_DATABASE: 'db'
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: redirection_service.Dockerfile
-    links:
+    depends_on:
       - api-service
     ports:
       - "5000:5000"
