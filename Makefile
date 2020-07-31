@@ -27,7 +27,6 @@ black:
 fix:
 	black -l 120 src/ tests/
 
-
 run_server:
 	python -m main
 
