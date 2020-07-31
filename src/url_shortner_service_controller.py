@@ -9,7 +9,7 @@ from src.generated.url_shortner_service_pb2 import (
 )
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from src.constants import Constants
-
+from src.database.models import Url
 
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
@@ -20,7 +20,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
 
     def create_short_url(self, request, context):
         if request.long_url:
-            pass
+            Url.create_short_url(long_url=request.long_url)
         return ShortUrl(
             short_url="https://domain_name/qwerty",
             error=None,

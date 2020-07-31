@@ -1,10 +1,12 @@
 import yaml
 
-'''
+"""
 This class is loads the YML file config
 in real world production system it would rather load from
 a Config server
-'''
+"""
+
+
 class ConstantYML:
     def __init__(self):
         CONFIG_FILE = "../config-dev.yml"
@@ -15,10 +17,12 @@ class ConstantYML:
                 print(exc)
 
 
-'''
+"""
 This class is usefull during internalization efforts
 As all strings used are collected in one place. 
-'''
+"""
+
+
 class Constants:
     ConstantYMLOBJECT = ConstantYML()
     ALL_SYSTEMS_GO = "All systems go :rocket:"
