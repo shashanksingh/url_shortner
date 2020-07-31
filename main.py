@@ -24,7 +24,7 @@ def serve():
     add_UrlShortnerServiceServicer_to_server(
         UrlShortnerServiceServicerController(), server
     )
-    server.add_insecure_port(f"[::]:{Constants.PORT_EXPOSED}")
+    server.add_insecure_port(f"[::]:{Constants.API_PORT_EXPOSED}")
     print(emoji.emojize(Constants.ALL_SYSTEMS_GO))
     server.start()
     server.wait_for_termination()

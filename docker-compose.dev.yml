@@ -5,7 +5,7 @@ volumes:
   db-volume:
 services:
   database:
-    image: library/mysql:8.0.21
+    image: library/my sql:8.0.21
     restart: always
     environment:
       MYSQL_DATABASE: 'db'
@@ -18,14 +18,14 @@ services:
       - db-volume:/var/lib/mysql
       - ./src/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
-#  api-service:
-#    build:
-#      context: .
-#      dockerfile: url_shortner.Dockerfile
-#    links:
-#      - database
-#    ports:
-#      - "9090:9090"
+  api-service:
+    build:
+      context: .
+      dockerfile: url_shortner.Dockerfile
+    links:
+      - database
+    ports:
+      - "9090:9090"
 
   redirection-service:
     build:
