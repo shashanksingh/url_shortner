@@ -34,6 +34,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response.list_of_short_urls.extend(
             [
                 ShortUrlDetails(
+                    long_url="https://www.hello.ef.com",
                     short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
                     created_at=timestamp.GetCurrentTime(),
                 )
@@ -47,6 +48,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response.list_of_short_urls.extend(
             [
                 ShortUrlDetails(
+                    long_url="https://www.hello.ef.com",
                     short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
                     created_at=timestamp.GetCurrentTime(),
                 )

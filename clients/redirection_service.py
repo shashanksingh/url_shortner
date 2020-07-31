@@ -17,7 +17,8 @@ grpc_stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
 def index(short_url):
     request = ShortUrl(short_url=escape(short_url))
     response = grpc_stub.get_short_url_details(request)
-    return redirect(response.list_of_short_urls[0].short_url, code=302)
+    print(request,response)
+    return redirect(response.list_of_short_urls[0].long_url, code=302)
 
 
-app.run(host="0.0.0.0", port=9091)
+app.run(host="0.0.0.0", port=5000)

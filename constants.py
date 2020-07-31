@@ -15,4 +15,4 @@ class Constants:
     MYSQL_USER_NAME = "user"
     MYSQL_PASSWORD = "password"
     MYSQL_HOST = "password"
-    BASE_DOMAIN_FOR_REDIRECTION_SERVICE = "http://localhost:9091/"
+    BASE_DOMAIN_FOR_REDIRECTION_SERVICE = "http://localhost:5000/"
