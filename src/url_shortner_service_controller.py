@@ -10,6 +10,7 @@ from src.generated.url_shortner_service_pb2 import (
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from src.constants import Constants
 
+
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
         pass
