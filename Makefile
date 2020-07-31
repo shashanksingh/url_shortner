@@ -31,6 +31,9 @@ fix:
 run_server:
 	python -m main
 
+run_redirection_service:
+	python -m run flask clients.redirection_service
+
 run_client:
 	python -m clients.examples.create_short_urls
 	python -m clients.examples.get_short_url_details

@@ -24,7 +24,8 @@ message Pong {
 
 message ShortUrlDetails {
   string short_url = 1;
-  google.protobuf.Timestamp created_at = 2;
+  string long_url = 2;
+  google.protobuf.Timestamp created_at = 3;
 }
 
 message ListOfShortUrlDetails {
