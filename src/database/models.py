@@ -6,7 +6,7 @@ Base = declarative_base()
 
 
 class Url(Base):
-    __tablename__ = "urls"
+    __tablename__ = "Urls"
     id = Column(Integer, primary_key=True)
     long_url = Column(String, index=True)
     short_url = Column(String)

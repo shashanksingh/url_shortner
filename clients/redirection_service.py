@@ -18,7 +18,6 @@ def index():
     return Constants.OOPS_SOMETHING_WENT_WRONG
 
 
-
 @app.route("/<short_url>")
 def redirect_service(short_url: str):
     if short_url:
@@ -26,8 +25,8 @@ def redirect_service(short_url: str):
         response = grpc_stub.get_short_url_details(request)
         if response.list_of_short_urls and len(response.list_of_short_urls) == 1:
             return redirect(
-                location = response.list_of_short_urls[0].long_url,
-                code = Constants.HTTP_RESPONSE_CODE_FOR_PERMANENTLY_MOVED,
+                location=response.list_of_short_urls[0].long_url,
+                code=Constants.HTTP_RESPONSE_CODE_FOR_PERMANENTLY_MOVED,
             )
     return Constants.OOPS_SOMETHING_WENT_WRONG
 

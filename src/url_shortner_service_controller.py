@@ -10,18 +10,21 @@ from src.generated.url_shortner_service_pb2 import (
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
 from src.database.models import Url
+from src.database.orm import Orm
 
 
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
-        pass
+        self.orm = Orm()
 
     def ping(self, request, context):
         return Pong(message=Constants.OPEN_THE_POD_BAY_DOOR)
 
     def create_short_url(self, request, context):
         if request.long_url:
-            Url.create_short_url(long_url=request.long_url)
+            new_url = Url.create_short_url(long_url=request.long_url)
+            self.orm.session.add(new_url)
+
         return ShortUrl(
             short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
             error=None,
