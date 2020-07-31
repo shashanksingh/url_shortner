@@ -11,6 +11,7 @@ from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServic
 from constants import Constants
 from src.database.models import Url
 
+
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
         pass
