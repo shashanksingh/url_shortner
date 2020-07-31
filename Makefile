@@ -14,8 +14,9 @@ build:
 	make proto
 	docker-compose -f docker-compose.dev.yml up
 
-clean_build:
+clean:
 	docker-compose -f docker-compose.dev.yml down --remove-orphans
+	docker volume 
 
 test:
 	pytest -sv tests/
@@ -26,8 +27,6 @@ black:
 fix:
 	black -l 120 src/ tests/
 
-clean:
-	rm -rf dist/ build/  || true
 
 run_server:
 	python -m main
