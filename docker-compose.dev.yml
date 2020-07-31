@@ -35,9 +35,9 @@ services:
       context: .
       dockerfile: url_shortner.Dockerfile
     links:
-      - database
+      - api-service
     ports:
-      - "9091:9091"
+      - "5000:5000"
 #  proxy:
 #    build:
 #      context: .

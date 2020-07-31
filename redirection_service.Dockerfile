@@ -10,4 +10,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 CMD [ "make", "run_redirection_service" ]
-EXPOSE 9090
+EXPOSE 5000
