@@ -8,7 +8,7 @@ from src.generated.url_shortner_service_pb2 import (
     ListOfShortUrlDetails,
 )
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
-from src.constants import Constants
+from constants import Constants
 from src.database.models import Url
 
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):

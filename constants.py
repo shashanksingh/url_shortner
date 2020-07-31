@@ -9,7 +9,7 @@ a Config server
 
 class ConstantYML:
     def __init__(self):
-        CONFIG_FILE = "../config-dev.yml"
+        CONFIG_FILE = "config-dev.yml"
         with open(CONFIG_FILE, "r") as stream:
             try:
                 self.yml = yaml.safe_load(stream)

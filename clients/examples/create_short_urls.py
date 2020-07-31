@@ -1,11 +1,11 @@
 import grpc
-from src.generated import url_shortner_service_pb2, url_shortner_service_pb2_grpc
+from src.generated import url_shortner_service_pb2_grpc
 from src.generated.url_shortner_service_pb2 import (
     Empty,
     LongUrl,
 )
 
-from src.constants import Constants
+from constants import Constants
 
 # open a gRPC channel
 channel = grpc.insecure_channel(f"localhost:{Constants.PORT_EXPOSED}")
