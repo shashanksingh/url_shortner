@@ -11,6 +11,7 @@ class Constants:
     OOPS_SOMETHING_WENT_WRONG = "Oops ! Something went wrong"
     API_PORT_EXPOSED = 9090
     REDIRECT_PORT_EXPOSED = 5000
+    HTTP_RESPONSE_CODE_FOR_PERMANENTLY_MOVED = 302
     RUNNING_ON_PORT = f"Running on port {API_PORT_EXPOSED} :thumbs_up:"
     OPEN_THE_POD_BAY_DOOR = "Open the POD BAY Door ! HAL"
     MAX_WORKERS_FOR_SERVER = 10

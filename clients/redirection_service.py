@@ -2,13 +2,12 @@ import grpc
 from src.generated import url_shortner_service_pb2_grpc
 from src.generated.url_shortner_service_pb2 import ShortUrl
 
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect
 from markupsafe import escape
 from constants import Constants
 
 # initializations
-app = Flask(__name__, template_folder='templates')
-app.config['EXPLAIN_TEMPLATE_LOADING']
+app = Flask(__name__, template_folder="templates")
 channel = grpc.insecure_channel(f"localhost:{Constants.API_PORT_EXPOSED}")
 grpc_stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
 
@@ -18,13 +17,18 @@ grpc_stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
 def index():
     return Constants.OOPS_SOMETHING_WENT_WRONG
 
+
+
 @app.route("/<short_url>")
-def redirect(short_url):
+def redirect(short_url: str):
     if short_url:
         request = ShortUrl(short_url=escape(short_url))
         response = grpc_stub.get_short_url_details(request)
         if response.list_of_short_urls and len(response.list_of_short_urls) == 1:
-            return redirect(response.list_of_short_urls[0].long_url, code=302)
+            return redirect(
+                response.list_of_short_urls[0].long_url,
+                code=Constants.HTTP_RESPONSE_CODE_FOR_PERMANENTLY_MOVED,
+            )
     return Constants.OOPS_SOMETHING_WENT_WRONG
 
 
