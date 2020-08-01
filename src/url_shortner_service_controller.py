@@ -9,7 +9,6 @@ from src.generated.url_shortner_service_pb2 import (
 )
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
-from src.database.models import Url
 from src.database.orm import Orm
 
 
@@ -22,7 +21,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
 
     def create_short_url(self, request, context):
         if request.long_url:
-            new_url = Url.create_short_url(long_url=request.long_url)
+            new_url = self.orm.Url.create_short_url(long_url=request.long_url)
             self.orm.session.add(new_url)
 
         return ShortUrl(
