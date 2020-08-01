@@ -12,10 +12,10 @@ class Orm(Singleton):
     """
 
     def __init__(self):
-        self.engine = create_engine(
-            f"mysql+mysqldb:///{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@{Constants.MYSQL_HOST}",
-            echo=True,
-        )
+        engine_string = "mysql+mysqldb:///"
+        engine_string += f"{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}"
+        engine_string += f"@{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}"
+        self.engine = create_engine(engine_string, echo=True,)
         session_object = sessionmaker(bind=self.engine)
 
         Base = automap_base()

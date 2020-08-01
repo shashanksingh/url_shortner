@@ -17,5 +17,6 @@ class Constants:
     MAX_WORKERS_FOR_SERVER = 10
     MYSQL_USER_NAME = "user"
     MYSQL_PASSWORD = "password"
-    MYSQL_HOST = "password"
+    MYSQL_HOST = "127.0.0.1"
+    MYSQL_DB = "db"
     BASE_DOMAIN_FOR_REDIRECTION_SERVICE = "http://localhost:5000/"
