@@ -13,7 +13,7 @@ class Orm(Singleton):
 
     def __init__(self):
         self.engine = create_engine(
-            f"mysql:///{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@{Constants.MYSQL_HOST}",
+            f"mysql+mysqldb:///{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@{Constants.MYSQL_HOST}",
             echo=True,
         )
         session_object = sessionmaker(bind=self.engine)
