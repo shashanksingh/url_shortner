@@ -14,13 +14,13 @@ class Orm(Singleton):
     def __init__(self):
         engine_string = "mysql+mysqldb:///"
         engine_string += f"{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}"
-        engine_string += f"@{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}"
-        self.engine = create_engine(engine_string, echo=True,)
+        engine_string += f"@{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}?host=localhost?port=3306"
+        self.engine = create_engine('mysql+mysqldb://user:password@127.0.0.1/db', echo=True,)
         session_object = sessionmaker(bind=self.engine)
 
         Base = automap_base()
         Base.prepare(self.engine, reflect=True)
-        self.session = session_object() 
+        self.session = session_object()
 
         url_model = Base.classes.Url
         url = url_model(long_url="js", short_url="js")
