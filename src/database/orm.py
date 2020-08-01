@@ -20,7 +20,7 @@ class Orm(Singleton):
 
         Base = automap_base()
         Base.prepare(self.engine, reflect=True)
-        self.session = session_object()
+        self.session = session_object() 
 
         url_model = Base.classes.Url
         url = url_model(long_url="js", short_url="js")
