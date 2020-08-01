@@ -22,6 +22,7 @@ class Orm(Singleton):
         Base.prepare(self.engine, reflect=True)
         self.session = session_object()
 
-        url_model = Base.classes.Url
-        url = url_model(long_url="js", short_url="js")
-        self.session.add(url)
+        # url_model = Base.classes.Url
+        print([x for x in Base.classes.keys()])
+        # url = url_model(long_url="js", short_url="js")
+        # self.session.add(url)
