@@ -6,7 +6,7 @@ from src.common.singleton import Singleton
 from constants import Constants
 
 
-class Orm(Singleton):
+class Orm(metaclass=Singleton):
     """
     A singleton class to access data from database
     """
@@ -23,6 +23,6 @@ class Orm(Singleton):
         self.session = session_object()
 
         # url_model = Base.classes.Url
-        print([x for x in Base.classes.keys()])
+        print([x for x in Base.classes.items()])
         # url = url_model(long_url="js", short_url="js")
         # self.session.add(url)
