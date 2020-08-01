@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.automap import automap_base
 
-from src.database.models import Base, Url
 from src.common.singleton import Singleton
+from constants import Constants
 
 
 class Orm(Singleton):
@@ -11,10 +12,16 @@ class Orm(Singleton):
     """
 
     def __init__(self):
-        self.engine = create_engine("sqlite:///user:passwod@localhost", echo=True)
+        self.engine = create_engine(
+            f"mysql:///{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@{Constants.MYSQL_HOST}",
+            echo=True,
+        )
         session_object = sessionmaker(bind=self.engine)
-        Base.metadata.create_all(self.engine)
+
+        Base = automap_base()
+        Base.prepare(self.engine, reflect=True)
         self.session = session_object()
 
-        url = Url(long_url="js", short_url="js")
+        url_model = Base.classes.Url
+        url = url_model(long_url="js", short_url="js")
         self.session.add(url)

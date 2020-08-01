@@ -12,19 +12,25 @@ Use Cases I want to test out with this
 2. REST/JSON 
 3. MYSQL ??
 4. 
+
+
+# Architecture
+1. Microservices talk to each other through GRPC / Proto 3
+2. Separation of concern is implemented on service level
+3.
+
+
+# Future
+1. User GRPC Web Proxy to automatically generate json api from proto descriptions
+2. 
+
 # DB performance
-
-Writing
-
-|                  Name (time in us)                 	|   Min   	|    Max   	|   Mean  	| OPS (Kops/s) 	|
-|:--------------------------------------------------:	|:-------:	|:--------:	|:-------:	|:------------:	|
-| test_performance_of_saving_all_graphs_into_storage 	| 46.5050 	| 132.3730 	| 49.8334 	|    20.0669   	|
-|                                                    	|         	|          	|         	|              	|
-|                                                    	|         	|          	|         	|              	|
 
 
 
 # Features
-
+1. Can create short URl for long URL
+2. Using API can show 
+3. Mysql s 
 
 
