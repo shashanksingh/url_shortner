@@ -24,17 +24,18 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
             try:
                 new_url = self.orm.create_short_url(long_url=request.long_url)
                 if new_url:
+                    print("Success")
                     return ShortUrl(
                         short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
                         error=None,
                         success=Success(code_number=Success.Code.ALL_GOOD, message=None),
                     )
             except DatabaseException as e:
-                pass
-
+                error_message = str(e)
+        print("failed")
         return ShortUrl(
             short_url=None,
-            error=Error(),
+            error=Error(code_number=Error.code.FAILED, messaage="failed"),
             success=None,
         )
 

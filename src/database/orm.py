@@ -26,10 +26,13 @@ class Orm(metaclass=Singleton):
         self.models = base.classes
         self.url = base.classes.Urls
 
-    def create_short_url(self, long_url:str ) -> bool:
+    def create_short_url(self, long_url:str ) -> [bool, str]:
+        short_url = hashing_function(long_url)
         try:
-            url = self.url(long_url=long_url, short_url=hashing_function(long_url))
+            url = self.url(long_url=long_url, short_url=short_url)
             self.session.add(url)
             self.session.commit()
         except IntegrityError as e:
             print("Duplicate items being inserted")
+            return False, None
+        return True, short_url
