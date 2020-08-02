@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 
@@ -18,11 +19,17 @@ class Orm(metaclass=Singleton):
         self.engine = create_engine('mysql+mysqldb://user:password@127.0.0.1/db', echo=True,)
         session_object = sessionmaker(bind=self.engine)
 
-        Base = automap_base()
-        Base.prepare(self.engine, reflect=True)
+        base = automap_base()
+        base.prepare(self.engine, reflect=True)
         self.session = session_object()
 
-        # url_model = Base.classes.Url
-        print([x for x in Base.classes.items()])
-        # url = url_model(long_url="js", short_url="js")
-        # self.session.add(url)
+        url_model = base.classes.Urls
+        # print([x for x in Base.classes.keys()])
+        try:
+            url = url_model(long_url="js1", short_url="js1")
+            self.session.add(url)
+            self.session.commit()
+        except IntegrityError as e:
+            print("Duplicate itemsbeing inserted")
+
+        print(self.session)

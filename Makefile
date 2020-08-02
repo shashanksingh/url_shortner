@@ -11,12 +11,16 @@ proto:
 	2to3 src/generated -w -n
 
 build:
-	make proto
 	docker-compose -f docker-compose.dev.yml up
 
 clean:
 	docker-compose -f docker-compose.dev.yml down --remove-orphans
-	docker volume 
+	docker volume rm url_shortner_db-volume
+
+rebuild_db:
+	docker-compose -f docker-compose.dev.yml  down
+	docker volume rm url_shortner_db-volume
+	docker-compose -f docker-compose.dev.yml  up
 
 test:
 	pytest -sv tests/
@@ -31,7 +35,9 @@ run_server:
 	python -m main
 
 run_redirection_service:
-	export FLASK_ENV=development && export FLASK_APP=clients/redirection_service.py	 && python -m flask run
+	export FLASK_ENV=development
+	export FLASK_APP=clients/redirection_service.py
+	python -m flask run
 
 run_client:
 	python -m clients.examples.create_short_urls
