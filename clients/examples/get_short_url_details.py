@@ -2,7 +2,7 @@ import grpc
 from src.generated import url_shortner_service_pb2_grpc
 from src.generated.url_shortner_service_pb2 import (
     Empty,
-    ShortUrl,
+    ShortUrl, LongUrl,
 )
 
 from constants import Constants
@@ -19,6 +19,9 @@ response = stub.ping(Empty())
 print(response)
 
 # https://www.freecodecamp.org/news/googles-protocol-buffers-in-python/
+
+# request = LongUrl(url="79fd8c4c-195e-44f7-93b2-0ee98698cc7c")
+# response = stub.get_short_url_details(request)
 
 request = ShortUrl(short_url="79fd8c4c-195e-44f7-93b2-0ee98698cc7c")
 response = stub.get_short_url_details(request)

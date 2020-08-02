@@ -30,7 +30,7 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
         error_message = None
         short_url = None
         try:
-            short_url = self.orm.create_short_url(long_url=request)
+            short_url = self.orm.create_short_url(long_url=request.url)
         except DatabaseException as e:
             error_message = str(e)
         except FieldAlreadyExists as e:
@@ -67,7 +67,7 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
             response.list_of_short_urls.extend(
                 [
                     ShortUrlDetails(
-                        short_url=item[0], long_url=item[1], created_at=Timestamp.FromDatetime(dt=item[2])
+                        short_url=item[0], long_url=item[1]
                     )
                     for item in db_response
                 ]
