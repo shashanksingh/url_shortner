@@ -38,13 +38,12 @@ class Orm(metaclass=Singleton):
         if not long_url:
             raise ValidationException()
 
-        short_url = generate_short_url()
-
         try:
             url_object = self.get_long_url_details(long_url)
-            if long_url:
+            if url_object and len(url_object) > 0:
                 short_url = url_object[0][0]
             else:
+                short_url = generate_short_url()
                 self.session.add(
                     self.url(
                         long_url=long_url,
