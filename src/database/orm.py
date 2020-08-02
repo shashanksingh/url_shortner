@@ -50,7 +50,6 @@ class Orm(metaclass=Singleton):
     def get_short_url_details(self, short_url: str) -> List[Tuple]:
         if not short_url:
             raise ValidationException()
-        short_url = generate_short_url(short_url)
         try:
             url_objects = (
                 self.session.query(self.url).filter_by(short_url=short_url).all()

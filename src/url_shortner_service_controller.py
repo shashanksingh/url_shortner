@@ -52,8 +52,9 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
     def get_short_url_details(self, request, context):
         error_message = None
         response = ListOfShortUrlDetails()
+
         try:
-            db_response = self.orm.get_short_url_details(short_url=request)
+            db_response = self.orm.get_short_url_details(short_url=request.short_url)
         except DatabaseException as e:
             error_message = str(e)
         except ValidationException as e:
