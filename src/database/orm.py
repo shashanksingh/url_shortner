@@ -16,8 +16,12 @@ class Orm(metaclass=Singleton):
     def __init__(self):
         engine_string = "mysql+mysqldb:///"
         engine_string += f"{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}"
-        engine_string += f"@{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}?host=localhost?port=3306"
-        self._engine = create_engine('mysql+mysqldb://user:password@127.0.0.1/db', echo=True,)
+        engine_string += (
+            f"@{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}?host=localhost?port=3306"
+        )
+        self._engine = create_engine(
+            "mysql+mysqldb://user:password@127.0.0.1/db", echo=True,
+        )
         session_object = sessionmaker(bind=self._engine)
 
         base = automap_base()
@@ -26,7 +30,7 @@ class Orm(metaclass=Singleton):
         self.models = base.classes
         self.url = base.classes.Urls
 
-    def create_short_url(self, long_url:str ) -> [bool, str]:
+    def create_short_url(self, long_url: str) -> [bool, str]:
         short_url = hashing_function(long_url)
         try:
             url = self.url(long_url=long_url, short_url=short_url)

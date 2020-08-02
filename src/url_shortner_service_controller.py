@@ -2,15 +2,16 @@ from google.protobuf.timestamp_pb2 import Timestamp
 
 from src.generated.url_shortner_service_pb2 import (
     Pong,
-    Success,
     ShortUrl,
     ShortUrlDetails,
-    ListOfShortUrlDetails, Error,
+    ListOfShortUrlDetails,
+    Error,
 )
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
 from src.database.orm import Orm
-from src.database.database_exception import DatabaseException
+from src.common.exceptions import DatabaseException, ValidationException
+
 
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
@@ -20,22 +21,22 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         return Pong(message=Constants.OPEN_THE_POD_BAY_DOOR)
 
     def create_short_url(self, request, context):
-        if request.long_url:
-            try:
-                new_url = self.orm.create_short_url(long_url=request.long_url)
-                if new_url:
-                    print("Success")
-                    return ShortUrl(
-                        short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
-                        error=None,
-                        success=Success(code_number=Success.Code.ALL_GOOD, message=None),
-                    )
-            except DatabaseException as e:
-                error_message = str(e)
-        print("failed")
+        error_message = None
+        response = None
+        short_url = None
+        try:
+            response, short_url = self.orm.create_short_url(long_url=request.long_url)
+        except DatabaseException as e:
+            error_message = str(e)
+        except ValidationException as e:
+            error_message = "Validation Error in input"
+
+        if response:
+            return ShortUrl(short_url=short_url)
+
         return ShortUrl(
             short_url=None,
-            error=Error(code_number=Error.code.FAILED, messaage="failed"),
+            error=Error(code_number=None, message=error_message),
             success=None,
         )
 
