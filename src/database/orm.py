@@ -35,7 +35,9 @@ class Orm(metaclass=Singleton):
     def create_short_url(self, long_url: str) -> [bool, str]:
         short_url = hashing_function(long_url)
         try:
-            self.session.add(self.url(long_url=long_url, short_url=hashing_function(long_url)))
+            self.session.add(
+                self.url(long_url=long_url, short_url=hashing_function(long_url))
+            )
             self.session.commit()
         except IntegrityError as e:
             raise DatabaseException()

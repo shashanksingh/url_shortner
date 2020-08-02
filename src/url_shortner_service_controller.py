@@ -7,6 +7,7 @@ from src.generated.url_shortner_service_pb2 import (
     ShortUrlDetails,
     ListOfShortUrlDetails,
     Error,
+    Success,
 )
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
@@ -33,10 +34,14 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
             error_message = "Validation Error in input"
 
         if response:
-            return ShortUrl(short_url=short_url)
+            return ShortUrl(
+                short_url=short_url,
+                error=None,
+                success=Success(code_number=None, message=short_url),
+            )
         return ShortUrl(
             short_url=None,
-            error=Error(code_number=None, message=error_message),
+            error=Error(code_number=Error.Code.Failed, message=error_message),
             success=None,
         )
 
