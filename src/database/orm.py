@@ -43,7 +43,7 @@ class Orm(metaclass=Singleton):
         try:
             url_object = self.get_long_url_details(long_url)
             if long_url:
-                short_url = url_object.short_url
+                short_url = url_object[0][0]
             else:
                 self.session.add(
                     self.url(
