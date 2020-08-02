@@ -15,7 +15,7 @@ from src.database.orm import Orm
 from src.common.exceptions import DatabaseException, ValidationException
 
 
-class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
+class UrlShortnerServiceController(UrlShortnerServiceServicer):
     def __init__(self):
         self.orm = Orm()
 
@@ -27,13 +27,13 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         db_response = None
         short_url = None
         try:
-            db_response, short_url = self.orm.create_short_url(long_url=request)
+            short_url = self.orm.create_short_url(long_url=request)
         except DatabaseException as e:
             error_message = str(e)
         except ValidationException as e:
             error_message = "Validation Error in input"
 
-        if db_response:
+        if not error_message:
             return ShortUrl(
                 short_url=short_url,
                 error=None,
@@ -50,7 +50,9 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response = None
         try:
             db_response = self.orm.get_short_url_details(short_url=request)
-        except:
+        except DatabaseException as e:
+            pass
+        except ValidationException as e:
             pass
         response.list_of_short_urls.extend(db_response)
         return response

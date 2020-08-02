@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 
-from src.common.exceptions import DatabaseException
+from src.common.exceptions import DatabaseException, ValidationException
 from src.common.singleton import Singleton
 from constants import Constants
 from src.common.hashing import hashing_function
@@ -20,7 +20,8 @@ class Orm(metaclass=Singleton):
     def __init__(self):
         self._engine = create_engine(
             f"{Constants.MYSQL_PROTOCOL}://{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@"
-            f"{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}", echo=True,
+            f"{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}",
+            echo=True,
         )
         session_object = sessionmaker(bind=self._engine)
 
@@ -30,7 +31,7 @@ class Orm(metaclass=Singleton):
         self.models = base.classes
         self.url = base.classes.Urls
 
-    def create_short_url(self, long_url: str) -> [bool, str]:
+    def create_short_url(self, long_url: str) -> str:
         short_url = hashing_function(long_url)
         try:
             self.session.add(
@@ -41,7 +42,23 @@ class Orm(metaclass=Singleton):
             raise DatabaseException()
         except OperationalError as e:
             raise DatabaseException()
-        return True, short_url
+        return short_url
 
-    def get_short_url_details(self, short_url:str) -> List[ShortUrlDetails]:
-        pass
+    def get_short_url_details(self, short_url: str) -> List[ShortUrlDetails]:
+        if not short_url:
+            raise ValidationException()
+        short_url = hashing_function(short_url)
+        try:
+            url_objects = self.session.query(self.url).filter(short_url=short_url).all()
+        except IntegrityError as e:
+            raise DatabaseException()
+        except OperationalError as e:
+            raise DatabaseException()
+        return [
+            ShortUrlDetails(
+                short_url=url_object.short_url,
+                long_url=url_objects.long_url,
+                created_at=url_objects.created_at,
+            )
+            for url_object in url_objects
+        ]

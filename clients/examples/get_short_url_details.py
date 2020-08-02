@@ -20,6 +20,6 @@ print(response)
 
 # https://www.freecodecamp.org/news/googles-protocol-buffers-in-python/
 
-request = ShortUrl()
+request = ShortUrl(short_url="79fd8c4c-195e-44f7-93b2-0ee98698cc7c")
 response = stub.get_short_url_details(request)
 print(response)

@@ -29,7 +29,7 @@ urls_to_shorten = {
     "latLng&t=1.73&ps=50&bt=19840101&et=20181231&startDwell=0&endDwell=0 ",
     "https://earthengine.google.com/timelapse/#v=37.79184,-122.33478,12.026,"
     "latLng&t=1.73&ps=50&bt=19840101&et=20181231&startDwell=0&endDwell=0 ",
-    "https://en.wikipedia.org/wiki/Base64"
+    "https://en.wikipedia.org/wiki/Base64",
 }
 for url in urls_to_shorten:
     request = LongUrl(url=url)
