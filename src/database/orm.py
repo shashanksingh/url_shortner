@@ -1,3 +1,4 @@
+import MySQLdb
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
@@ -34,9 +35,10 @@ class Orm(metaclass=Singleton):
     def create_short_url(self, long_url: str) -> [bool, str]:
         short_url = hashing_function(long_url)
         try:
-            url = self.url(long_url=long_url, short_url=short_url)
-            self.session.add(url)
+            self.session.add(self.url(long_url=long_url, short_url=hashing_function(long_url)))
             self.session.commit()
         except IntegrityError as e:
+            raise DatabaseException()
+        except MySQLdb._exceptions.OperationalError as e:
             raise DatabaseException()
         return True, short_url

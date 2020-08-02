@@ -1,5 +1,6 @@
 from google.protobuf.timestamp_pb2 import Timestamp
 
+from src.common.hashing import hashing_function
 from src.generated.url_shortner_service_pb2 import (
     Pong,
     ShortUrl,
@@ -25,8 +26,7 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response = None
         short_url = None
         try:
-            # response, short_url = self.orm.create_short_url(long_url=request.long_url)
-            response, short_url =  True, "https://asad"
+            response, short_url = self.orm.create_short_url(long_url=request)
         except DatabaseException as e:
             error_message = str(e)
         except ValidationException as e:
