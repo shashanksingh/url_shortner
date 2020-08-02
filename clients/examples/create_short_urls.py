@@ -19,8 +19,6 @@ try:
     response = stub.ping(Empty())
     print(response)
 
-    # https://www.freecodecamp.org/news/googles-protocol-buffers-in-python/
-
     urls_to_shorten = {
         "https://medium.com/@efhello",
         "https://www.hello.ef.com",
