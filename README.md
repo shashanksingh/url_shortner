@@ -35,6 +35,7 @@ Do load tests
 1. Can create short URl for long URL
 2. Using API can show 
 3. Mysql s 
+4. if already ecsits dont create new, send old one 
 
 
 
