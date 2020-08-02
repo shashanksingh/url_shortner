@@ -25,7 +25,8 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         response = None
         short_url = None
         try:
-            response, short_url = self.orm.create_short_url(long_url=request.long_url)
+            # response, short_url = self.orm.create_short_url(long_url=request.long_url)
+            response, short_url =  True, "https://asad"
         except DatabaseException as e:
             error_message = str(e)
         except ValidationException as e:
@@ -33,7 +34,6 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
 
         if response:
             return ShortUrl(short_url=short_url)
-
         return ShortUrl(
             short_url=None,
             error=Error(code_number=None, message=error_message),

@@ -3,6 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 
+from src.common.exceptions import DatabaseException
 from src.common.singleton import Singleton
 from constants import Constants
 from src.common.hashing import hashing_function
@@ -37,6 +38,5 @@ class Orm(metaclass=Singleton):
             self.session.add(url)
             self.session.commit()
         except IntegrityError as e:
-            print("Duplicate items being inserted")
-            return False, None
+            raise DatabaseException()
         return True, short_url
