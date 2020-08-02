@@ -59,6 +59,6 @@ class Orm(metaclass=Singleton):
         except OperationalError as e:
             raise DatabaseException()
         return [
-            (url_object.short_url, url_objects.long_url, url_objects.created_at,)
+            (url_object.short_url, url_object.long_url, url_object.created_at,)
             for url_object in url_objects
         ]

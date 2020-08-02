@@ -67,7 +67,7 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
             response.list_of_short_urls.extend(
                 [
                     ShortUrlDetails(
-                        short_url=item[0], long_url=item[1], created_at=item[2]
+                        short_url=item[0], long_url=item[1], created_at=Timestamp.FromDatetime(dt=item[2])
                     )
                     for item in db_response
                 ]
