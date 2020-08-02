@@ -80,7 +80,7 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
         response = ListOfShortUrlDetails()
 
         try:
-            db_response = self.orm.get_all_short_urls(short_url=request.short_url)
+            db_response = self.orm.get_all_short_urls()
         except DatabaseException as e:
             error_message = str(e)
 
