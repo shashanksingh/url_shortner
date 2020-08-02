@@ -47,14 +47,31 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
 
     def get_short_url_details(self, request, context):
         error_message = None
-        response = None
+        response = ListOfShortUrlDetails()
         try:
             db_response = self.orm.get_short_url_details(short_url=request)
         except DatabaseException as e:
-            pass
+            error_message = str(e)
         except ValidationException as e:
-            pass
-        response.list_of_short_urls.extend(db_response)
+            error_message = "Validation Error in input"
+
+        if error_message:
+            response.list_of_short_urls.extend[
+                ShortUrlDetails(short_url=None, long_url=None, created_at=None)
+            ]
+            response.error = Error()
+            response.success = None
+        else:
+            response.list_of_short_urls.extend(
+                [
+                    ShortUrlDetails(
+                        short_url=item[0], long_url=item[1], created_at=item[2]
+                    )
+                    for item in db_response
+                ]
+            )
+            response.error = None
+            response.success = Success()
         return response
 
     def get_all_short_urls(self, request, context):
