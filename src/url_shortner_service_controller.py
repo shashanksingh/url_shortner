@@ -10,7 +10,6 @@ from src.generated.url_shortner_service_pb2 import (
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
 from src.database.orm import Orm
-from src.common.hashing import hashing_function
 from src.database.database_exception import DatabaseException
 
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):

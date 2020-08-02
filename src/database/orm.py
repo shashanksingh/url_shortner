@@ -5,6 +5,7 @@ from sqlalchemy.ext.automap import automap_base
 
 from src.common.singleton import Singleton
 from constants import Constants
+from src.common.hashing import hashing_function
 
 
 class Orm(metaclass=Singleton):
@@ -23,17 +24,12 @@ class Orm(metaclass=Singleton):
         base.prepare(self._engine, reflect=True)
         self.session = session_object()
         self.models = base.classes
+        self.url = base.classes.Urls
 
-        url_model = base.classes.Urls
-        # print([x for x in Base.classes.keys()])
+    def create_short_url(self, long_url:str ) -> bool:
         try:
-            url = url_model(long_url="js1", short_url="js1")
+            url = self.url(long_url=long_url, short_url=hashing_function(long_url))
             self.session.add(url)
             self.session.commit()
         except IntegrityError as e:
-            print("Duplicate itemsbeing inserted")
-
-        print(self.session)
-
-    def create_short_url(self, long_url:str ) -> bool:
-        pass
+            print("Duplicate items being inserted")
