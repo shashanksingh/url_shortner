@@ -5,7 +5,7 @@ from src.generated.url_shortner_service_pb2 import (
     ShortUrl,
     LongUrl,
 )
-
+import emoji
 from constants import Constants
 
 # open a gRPC channel
@@ -24,10 +24,19 @@ response_of_create = None
 for url in urls_to_shorten:
     request = LongUrl(url=url)
     response_of_create = stub.create_short_url(request)
-    print(f"Short URL created :  \n Url = {url} , \n Short URL = {response_of_create}")
+    print(
+        emoji.emojize(
+            f"🧐 Short URL created :  \n Url = {url} , \n Short URL = {response_of_create}"
+        )
+    )
 
 
 # ask for detail of same request
 request = ShortUrl(short_url=response_of_create.short_url)
 response = stub.get_short_url_details(request)
-print(request, "=>", response)
+print(
+    emoji.emojize(
+        f"🧐 Lets Request the newly created short link to get more details :"
+        f"\n Short Link = {request} \n Details = {response}"
+    )
+)
