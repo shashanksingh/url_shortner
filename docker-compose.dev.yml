@@ -19,7 +19,7 @@ services:
       - ./src/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
 #  api-service:
-#    image: api-service:${TAG:-latest}
+#    image: url-shortner-api-service:${TAG:-latest}
 #    build:
 #      context: .
 #      dockerfile: url_shortner.Dockerfile
@@ -29,7 +29,7 @@ services:
 #      - "9090:9090"
 #
 #  redirection-service:
-#    image: redirection-service:${TAG:-latest}
+#    image: url-shortner-redirection-service:${TAG:-latest}
 #    build:
 #      context: .
 #      dockerfile: redirection_service.Dockerfile
@@ -37,4 +37,14 @@ services:
 #      - api-service
 #    ports:
 #      - "5000:5000"
+#
+#
+#  clients:
+#    image: url-shortner-clients:${TAG:-latest}
+#    build:
+#      context: .
+#      dockerfile: redirection_service.Dockerfile
+#    depends_on:
+#      - redirection-service
+#      - api-service
 

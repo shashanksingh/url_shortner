@@ -22,17 +22,20 @@ Use Cases I want to test out with this
 
 # Future
 1. User GRPC Web Proxy to automatically generate json api from proto descriptions
-2. 
+2. Cacheing Using Redis
+3. Production/Dev split
+4. connect to config server and save config in consul
+5. 
 
 # DB performance
-
+Do load tests
 
 
 # Features
 1. Can create short URl for long URL
 2. Using API can show 
 3. Mysql s 
-4. Cacheing Using Redis
-5.  
+
+
 
 

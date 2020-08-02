@@ -5,12 +5,13 @@ from src.generated.url_shortner_service_pb2 import (
     Success,
     ShortUrl,
     ShortUrlDetails,
-    ListOfShortUrlDetails,
+    ListOfShortUrlDetails, Error,
 )
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
 from src.database.orm import Orm
 from src.common.hashing import hashing_function
+from src.database.database_exception import DatabaseException
 
 class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
     def __init__(self):
@@ -21,13 +22,21 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
 
     def create_short_url(self, request, context):
         if request.long_url:
-            new_url = self.orm.Url.create_short_url(long_url=request.long_url)
-            self.orm.session.add(new_url)
+            try:
+                new_url = self.orm.create_short_url(long_url=request.long_url)
+                if new_url:
+                    return ShortUrl(
+                        short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
+                        error=None,
+                        success=Success(code_number=Success.Code.ALL_GOOD, message=None),
+                    )
+            except DatabaseException as e:
+                pass
 
         return ShortUrl(
-            short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
-            error=None,
-            success=Success(code_number=Success.Code.ALL_GOOD, message=None),
+            short_url=None,
+            error=Error(),
+            success=None,
         )
 
     def get_short_url_details(self, request, context):
