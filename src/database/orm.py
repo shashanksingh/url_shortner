@@ -61,3 +61,16 @@ class Orm(metaclass=Singleton):
         return [
             (url_object.short_url, url_object.long_url) for url_object in url_objects
         ]
+
+    def get_all_short_urls(self) -> List[Tuple]:
+        try:
+            url_objects = (
+                self.session.query(self.url).all()
+            )
+        except IntegrityError as e:
+            raise FieldAlreadyExists()
+        except OperationalError as e:
+            raise DatabaseException()
+        return [
+            (url_object.short_url, url_object.long_url) for url_object in url_objects
+        ]

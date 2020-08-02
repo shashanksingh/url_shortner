@@ -76,15 +76,24 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
         return response
 
     def get_all_short_urls(self, request, context):
-        timestamp = Timestamp()
+        error_message = None
         response = ListOfShortUrlDetails()
-        response.list_of_short_urls.extend(
-            [
-                ShortUrlDetails(
-                    long_url="https://www.hello.ef.com",
-                    short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
-                    created_at=timestamp.GetCurrentTime(),
-                )
-            ]
-        )
+
+        try:
+            db_response = self.orm.get_all_short_urls(short_url=request.short_url)
+        except DatabaseException as e:
+            error_message = str(e)
+
+        if error_message:
+            response.list_of_short_urls.extend([ShortUrlDetails()])
+        else:
+            response.list_of_short_urls.extend(
+                [
+                    ShortUrlDetails(
+                        short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}{item[0]}",
+                        long_url=item[1],
+                    )
+                    for item in db_response
+                ]
+            )
         return response
