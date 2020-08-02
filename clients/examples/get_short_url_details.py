@@ -15,15 +15,19 @@ channel = grpc.insecure_channel(f"localhost:{Constants.API_PORT_EXPOSED}")
 stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
 
 
-# make the call
-response = stub.ping(Empty())
-print(response)
+# create request
+urls_to_shorten = {
+    "https://play.google.com/store/apps/details?id=com.ef.efhello&hl=en_GB",
+}
+response_of_create = None
 
-# https://www.freecodecamp.org/news/googles-protocol-buffers-in-python/
+for url in urls_to_shorten:
+    request = LongUrl(url=url)
+    response_of_create = stub.create_short_url(request)
+    print(f"Short URL created :  \n Url = {url} , \n Short URL = {response_of_create}")
 
-# request = LongUrl(url="79fd8c4c-195e-44f7-93b2-0ee98698cc7c")
-# response = stub.get_short_url_details(request)
 
-request = ShortUrl(short_url="9bce06a6-e22b-44a6-af45-e98bb97a24f0")
+# ask for detail of same request
+request = ShortUrl(short_url=response_of_create.short_url)
 response = stub.get_short_url_details(request)
 print(request, "=>", response)
