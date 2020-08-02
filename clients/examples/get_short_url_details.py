@@ -2,7 +2,8 @@ import grpc
 from src.generated import url_shortner_service_pb2_grpc
 from src.generated.url_shortner_service_pb2 import (
     Empty,
-    ShortUrl, LongUrl,
+    ShortUrl,
+    LongUrl,
 )
 
 from constants import Constants
@@ -25,4 +26,4 @@ print(response)
 
 request = ShortUrl(short_url="9bce06a6-e22b-44a6-af45-e98bb97a24f0")
 response = stub.get_short_url_details(request)
-print(request,"=>" ,response)
+print(request, "=>", response)
