@@ -3,5 +3,5 @@ CREATE TABLE Urls (
     `long_url` varchar(2048) NOT NULL     ,
     `short_url` varchar(255) NOT NULL,
     PRIMARY KEY (`id`),
-	UNIQUE INDEX long_url_unqiue_index (long_url)
+	UNIQUE INDEX short_url (short_url)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
