@@ -19,4 +19,5 @@ class Constants:
     MYSQL_PASSWORD = "password"
     MYSQL_HOST = "127.0.0.1"
     MYSQL_DB = "db"
+    MYSQL_PROTOCOL = "mysql+mysqldb"
     BASE_DOMAIN_FOR_REDIRECTION_SERVICE = "http://localhost:5000/"

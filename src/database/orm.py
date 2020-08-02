@@ -1,6 +1,5 @@
-import MySQLdb
 from sqlalchemy import create_engine
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 
@@ -16,13 +15,9 @@ class Orm(metaclass=Singleton):
     """
 
     def __init__(self):
-        engine_string = "mysql+mysqldb:///"
-        engine_string += f"{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}"
-        engine_string += (
-            f"@{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}?host=localhost?port=3306"
-        )
         self._engine = create_engine(
-            "mysql+mysqldb://user:password@127.0.0.1/db", echo=True,
+            f"{Constants.MYSQL_PROTOCOL}://{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@"
+            f"{Constants.MYSQL_HOST}/{Constants.MYSQL_DB}", echo=True,
         )
         session_object = sessionmaker(bind=self._engine)
 
@@ -41,6 +36,6 @@ class Orm(metaclass=Singleton):
             self.session.commit()
         except IntegrityError as e:
             raise DatabaseException()
-        except MySQLdb._exceptions.OperationalError as e:
+        except OperationalError as e:
             raise DatabaseException()
         return True, short_url
