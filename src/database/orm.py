@@ -52,7 +52,7 @@ class Orm(metaclass=Singleton):
             raise ValidationException()
         short_url = hashing_function(short_url)
         try:
-            url_objects = self.session.query(self.url).filter(short_url=short_url).all()
+            url_objects = self.session.query(self.url).filter_by(short_url=short_url).all()
         except IntegrityError as e:
             raise FieldAlreadyExists()
         except OperationalError as e:

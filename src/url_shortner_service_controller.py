@@ -62,7 +62,6 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
 
         if error_message:
             response.list_of_short_urls.extend([ShortUrlDetails()])
-            response.error = Error()
         else:
             response.list_of_short_urls.extend(
                 [
@@ -72,7 +71,6 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
                     for item in db_response
                 ]
             )
-            response.success = Success()
         return response
 
     def get_all_short_urls(self, request, context):
