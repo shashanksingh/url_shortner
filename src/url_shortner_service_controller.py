@@ -24,16 +24,16 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
 
     def create_short_url(self, request, context):
         error_message = None
-        response = None
+        db_response = None
         short_url = None
         try:
-            response, short_url = self.orm.create_short_url(long_url=request)
+            db_response, short_url = self.orm.create_short_url(long_url=request)
         except DatabaseException as e:
             error_message = str(e)
         except ValidationException as e:
             error_message = "Validation Error in input"
 
-        if response:
+        if db_response:
             return ShortUrl(
                 short_url=short_url,
                 error=None,
@@ -46,17 +46,13 @@ class UrlShortnerServiceServicerController(UrlShortnerServiceServicer):
         )
 
     def get_short_url_details(self, request, context):
-        timestamp = Timestamp()
-        response = ListOfShortUrlDetails()
-        response.list_of_short_urls.extend(
-            [
-                ShortUrlDetails(
-                    long_url="https://www.hello.ef.com",
-                    short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}/qwerty",
-                    created_at=timestamp.GetCurrentTime(),
-                )
-            ]
-        )
+        error_message = None
+        response = None
+        try:
+            db_response = self.orm.get_short_url_details(short_url=request)
+        except:
+            pass
+        response.list_of_short_urls.extend(db_response)
         return response
 
     def get_all_short_urls(self, request, context):

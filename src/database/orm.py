@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import sessionmaker
@@ -7,6 +9,7 @@ from src.common.exceptions import DatabaseException
 from src.common.singleton import Singleton
 from constants import Constants
 from src.common.hashing import hashing_function
+from src.generated.url_shortner_service_pb2 import ShortUrlDetails
 
 
 class Orm(metaclass=Singleton):
@@ -39,3 +42,6 @@ class Orm(metaclass=Singleton):
         except OperationalError as e:
             raise DatabaseException()
         return True, short_url
+
+    def get_short_url_details(self, short_url:str) -> List[ShortUrlDetails]:
+        pass
