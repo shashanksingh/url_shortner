@@ -23,6 +23,6 @@ print(response)
 # request = LongUrl(url="79fd8c4c-195e-44f7-93b2-0ee98698cc7c")
 # response = stub.get_short_url_details(request)
 
-request = ShortUrl(short_url="79fd8c4c-195e-44f7-93b2-0ee98698cc7c")
+request = ShortUrl(short_url="9bce06a6-e22b-44a6-af45-e98bb97a24f0")
 response = stub.get_short_url_details(request)
 print(request,"=>" ,response)

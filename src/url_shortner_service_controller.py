@@ -67,7 +67,7 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
             response.list_of_short_urls.extend(
                 [
                     ShortUrlDetails(
-                        short_url=item[0], long_url=item[1]
+                        short_url=f"{Constants.BASE_DOMAIN_FOR_REDIRECTION_SERVICE}{item[0]}", long_url=item[1]
                     )
                     for item in db_response
                 ]
