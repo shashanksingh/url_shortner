@@ -1,3 +1,14 @@
+There are two ways
+a. Docker-Compose
+b. Makefile
+
+a. Docker Compose
+docker-compose -f docker-compose.dev.yml  up database
+docker-compose -f docker-compose.dev.yml  up api-service
+docker-compose -f docker-compose.dev.yml  up redirection-service
+docker-compose -f docker-compose.dev.yml  up clients
+
+b. Makefile
 1. Install Python 3.8+
 2. Install virtualenv
     `pip install pyenv pyenv-virtualenv`

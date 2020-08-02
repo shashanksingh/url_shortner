@@ -37,7 +37,7 @@ run_server:
 run_redirection_service:
 	export FLASK_ENV=development && export FLASK_APP=clients/redirection_service.py && python -m flask run
 
-run_client:
+run_clients:
 	python -m clients.examples.create_short_urls
 	python -m clients.examples.get_short_url_details
 	python -m clients.examples.get_all_short_urls

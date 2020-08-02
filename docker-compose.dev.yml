@@ -18,33 +18,33 @@ services:
       - db-volume:/var/lib/mysql
       - ./src/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
-#  api-service:
-#    image: url-shortner-api-service:${TAG:-latest}
-#    build:
-#      context: .
-#      dockerfile: url_shortner.Dockerfile
-#    links:
-#      - database
-#    ports:
-#      - "9090:9090"
-#
-#  redirection-service:
-#    image: url-shortner-redirection-service:${TAG:-latest}
-#    build:
-#      context: .
-#      dockerfile: redirection_service.Dockerfile
-#    depends_on:
-#      - api-service
-#    ports:
-#      - "5000:5000"
-#
-#
-#  clients:
-#    image: url-shortner-clients:${TAG:-latest}
-#    build:
-#      context: .
-#      dockerfile: redirection_service.Dockerfile
-#    depends_on:
-#      - redirection-service
-#      - api-service
+  api-service:
+    image: url-shortner-api-service:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: url_shortner.Dockerfile
+    depends_on:
+      - database
+    ports:
+      - "9090:9090"
+
+  redirection-service:
+    image: url-shortner-redirection-service:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: redirection_service.Dockerfile
+    depends_on:
+      - api-service
+    ports:
+      - "5000:5000"
+
+
+  clients:
+    image: url_shortner_clients:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: url_shortner_clients.Dockerfile
+    depends_on:
+      - redirection-service
+      - api-service
 
