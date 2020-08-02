@@ -87,7 +87,9 @@ class Orm(metaclass=Singleton):
     def get_long_url_details(self, long_url: str) -> List[Tuple]:
         try:
             url_objects = (
-                self.session.query(self.url).filter_by(long_url_hash=generate_unique_hash(long_url)).all()
+                self.session.query(self.url)
+                .filter_by(long_url_hash=generate_unique_hash(long_url))
+                .all()
             )
         except OperationalError as e:
             raise DatabaseException()
