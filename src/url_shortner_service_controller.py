@@ -1,6 +1,6 @@
+import grpc
 from google.protobuf.timestamp_pb2 import Timestamp
 
-from src.common.hashing import hashing_function
 from src.generated.url_shortner_service_pb2 import (
     Pong,
     ShortUrl,
@@ -12,7 +12,11 @@ from src.generated.url_shortner_service_pb2 import (
 from src.generated.url_shortner_service_pb2_grpc import UrlShortnerServiceServicer
 from constants import Constants
 from src.database.orm import Orm
-from src.common.exceptions import DatabaseException, ValidationException
+from src.common.exceptions import (
+    DatabaseException,
+    ValidationException,
+    FieldAlreadyExists,
+)
 
 
 class UrlShortnerServiceController(UrlShortnerServiceServicer):
@@ -24,25 +28,25 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
 
     def create_short_url(self, request, context):
         error_message = None
-        db_response = None
         short_url = None
         try:
             short_url = self.orm.create_short_url(long_url=request)
         except DatabaseException as e:
             error_message = str(e)
+        except FieldAlreadyExists as e:
+            error_message = "Short Url Already Exists"
+            context.set_code(grpc.StatusCode.ALREADY_EXISTS)
         except ValidationException as e:
             error_message = "Validation Error in input"
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
 
         if not error_message:
             return ShortUrl(
                 short_url=short_url,
-                error=None,
                 success=Success(code_number=None, message=short_url),
             )
         return ShortUrl(
-            short_url=None,
-            error=Error(code_number=Error.Code.Failed, message=error_message),
-            success=None,
+            error=Error(code_number=Error.Code.Failed, message=error_message)
         )
 
     def get_short_url_details(self, request, context):
@@ -54,13 +58,11 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
             error_message = str(e)
         except ValidationException as e:
             error_message = "Validation Error in input"
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
 
         if error_message:
-            response.list_of_short_urls.extend[
-                ShortUrlDetails(short_url=None, long_url=None, created_at=None)
-            ]
+            response.list_of_short_urls.extend([ShortUrlDetails()])
             response.error = Error()
-            response.success = None
         else:
             response.list_of_short_urls.extend(
                 [
@@ -70,7 +72,6 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
                     for item in db_response
                 ]
             )
-            response.error = None
             response.success = Success()
         return response
 

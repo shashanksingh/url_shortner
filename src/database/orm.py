@@ -5,7 +5,11 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.automap import automap_base
 
-from src.common.exceptions import DatabaseException, ValidationException
+from src.common.exceptions import (
+    DatabaseException,
+    ValidationException,
+    FieldAlreadyExists,
+)
 from src.common.singleton import Singleton
 from constants import Constants
 from src.common.hashing import hashing_function
@@ -50,7 +54,7 @@ class Orm(metaclass=Singleton):
         try:
             url_objects = self.session.query(self.url).filter(short_url=short_url).all()
         except IntegrityError as e:
-            raise DatabaseException()
+            raise FieldAlreadyExists()
         except OperationalError as e:
             raise DatabaseException()
         return [
