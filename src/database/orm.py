@@ -12,7 +12,7 @@ from src.common.exceptions import (
 )
 from src.common.singleton import Singleton
 from constants import Constants
-from src.common.hashing import generate_short_url
+from src.common.hashing import generate_short_url, generate_unique_hash
 
 
 class Orm(metaclass=Singleton):
@@ -38,7 +38,11 @@ class Orm(metaclass=Singleton):
         short_url = generate_short_url(long_url)
         try:
             self.session.add(
-                self.url(long_url=long_url, short_url=generate_short_url(long_url))
+                self.url(
+                    long_url=long_url,
+                    short_url=generate_short_url(),
+                    long_url_hash=generate_unique_hash(long_url),
+                )
             )
             self.session.commit()
         except IntegrityError as e:

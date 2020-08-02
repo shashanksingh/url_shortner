@@ -5,5 +5,5 @@ CREATE TABLE Urls (
     `created_at` Timestamp DEFAULT CURRENT_TIMESTAMP,
     `long_url_hash` varchar(512) NOT NULL,
     PRIMARY KEY (`id`),
-	UNIQUE INDEX short_url (short_url)
+	UNIQUE INDEX long_url_hash_uniqueness_constraint (long_url_hash)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
