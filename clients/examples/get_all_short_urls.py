@@ -7,19 +7,22 @@ from src.generated.url_shortner_service_pb2 import (
 
 from constants import Constants
 
-# open a gRPC channel
-channel = grpc.insecure_channel(f"localhost:{Constants.API_PORT_EXPOSED}")
+try:
+    # open a gRPC channel
+    channel = grpc.insecure_channel(f"localhost:{Constants.API_PORT_EXPOSED}")
 
-# create a stub (client)
-stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
+    # create a stub (client)
+    stub = url_shortner_service_pb2_grpc.UrlShortnerServiceStub(channel)
 
+    # make the call
+    response = stub.ping(Empty())
+    print(response)
 
-# make the call
-response = stub.ping(Empty())
-print(response)
+    # https://www.freecodecamp.org/news/googles-protocol-buffers-in-python/
 
-# https://www.freecodecamp.org/news/googles-protocol-buffers-in-python/
+    request = ShortUrl()
+    response = stub.get_all_short_urls(request)
+    print(response)
 
-request = ShortUrl()
-response = stub.get_all_short_urls(request)
-print(response)
+except grpc._channel._InactiveRpcError:
+    print("URL Shortner service is down")
