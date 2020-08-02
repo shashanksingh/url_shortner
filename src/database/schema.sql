@@ -1,7 +1,7 @@
-CREATE TABLE `Urls` (
-  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
-  `long_url` varchar(2048) NOT NULL,
-  `short_url` varchar(255) NOT NULL,
-  PRIMARY KEY (id),
-  KEY `long_url` (`long_url`(1024))
+CREATE TABLE Urls (
+    `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+    `long_url` varchar(2048) NOT NULL     ,
+    `short_url` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`),
+	UNIQUE INDEX long_url_unqiue_index (long_url)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
