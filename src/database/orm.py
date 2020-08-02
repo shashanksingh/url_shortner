@@ -12,7 +12,7 @@ from src.common.exceptions import (
 )
 from src.common.singleton import Singleton
 from constants import Constants
-from src.common.hashing import hashing_function
+from src.common.hashing import generate_short_url
 
 
 class Orm(metaclass=Singleton):
@@ -35,10 +35,10 @@ class Orm(metaclass=Singleton):
         self.url = base.classes.Urls
 
     def create_short_url(self, long_url: str) -> str:
-        short_url = hashing_function(long_url)
+        short_url = generate_short_url(long_url)
         try:
             self.session.add(
-                self.url(long_url=long_url, short_url=hashing_function(long_url))
+                self.url(long_url=long_url, short_url=generate_short_url(long_url))
             )
             self.session.commit()
         except IntegrityError as e:
@@ -50,9 +50,11 @@ class Orm(metaclass=Singleton):
     def get_short_url_details(self, short_url: str) -> List[Tuple]:
         if not short_url:
             raise ValidationException()
-        short_url = hashing_function(short_url)
+        short_url = generate_short_url(short_url)
         try:
-            url_objects = self.session.query(self.url).filter_by(short_url=short_url).all()
+            url_objects = (
+                self.session.query(self.url).filter_by(short_url=short_url).all()
+            )
         except IntegrityError as e:
             raise FieldAlreadyExists()
         except OperationalError as e:
