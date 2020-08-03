@@ -20,7 +20,7 @@ class Orm(metaclass=Singleton):
     A singleton class to access data from database
     """
 
-    def __init__(self, engine):
+    def __init__(self, engine=None):
         """
 
         :param engine: A side effect which would be removed in future
