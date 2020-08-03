@@ -5,10 +5,14 @@
 • As a user I want my shortened URL to redirect to the original URL
 
 
+# INSTALLATION
+Please read SETUP.md file
+
+
 # Architecture
 1. Microservices talk to each other through GRPC / Proto 3
 2. Separation of concern is implemented on service level
-3. Pros of
+3. Docker compose is used to create architecture
 
 
 # Future to handle load
@@ -17,6 +21,8 @@
 3. Production/Dev split
 4. connect to config server and save config in consul
 5. Sharding on mysql database
+6. Use ""wait for service to use docker compsoe for full architecture generation
+7. Use Alembic to generate schema instead of hardcoded one
 
 # DB performance
 Do load tests result
@@ -37,7 +43,5 @@ Legend:
 2. Using API can show all short url that exists
 3. Can get details for a short url
 4. if already exits dont create new, send old one 
-
-
 
 

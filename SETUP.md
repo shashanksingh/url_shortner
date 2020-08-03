@@ -40,9 +40,13 @@ tests/test_performance_bechmark.py::test_performance_of_saving_all_graphs_into_s
 Pulling image mysql:8.0.21
 ⠼
 Container started:  ed2b0488ef
+plugins: mock-3.2.0, benchmark-3.2.3
+collected 1 item                                                                                                                                                                                                                           
+
+tests/test_url_shortner_service_controller.py::test_e2e_from_controller_to_database_for_all_functionality 
+Pulling image mysql:5.7.28
+⠼
+Container started:  f396bbb74b
 Waiting to be ready...
-⠧      FAILED
-tests/test_url_shortner_service_controller.py::test_create_short_url 
-Pulling image mysql:8.0.21
-⠴
-Container started:  2f4a18c176`
+PASSED
+

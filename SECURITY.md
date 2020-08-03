@@ -10,6 +10,3 @@ currently being supported with security updates.
 | 0.0.1   | :white_check_mark: |
 
 
-## Reporting a Vulnerability
-
-Please open a Github Issue
