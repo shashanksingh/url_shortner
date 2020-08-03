@@ -12,6 +12,8 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
+    expose:
+      - "3306"
     ports:
       - "3306:3306"
     volumes:
@@ -25,6 +27,8 @@ services:
       dockerfile: url_shortner.Dockerfile
     links:
       - database
+    expose:
+      - "9090"
     ports:
       - "9090:9090"
 
@@ -35,6 +39,8 @@ services:
       dockerfile: redirection_service.Dockerfile
     depends_on:
       - api-service
+    expose:
+      - "5000"
     ports:
       - "5000:5000"
 

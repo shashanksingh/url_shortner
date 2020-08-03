@@ -1,5 +1,4 @@
 import grpc
-from google.protobuf.timestamp_pb2 import Timestamp
 
 from src.generated.url_shortner_service_pb2 import (
     Pong,
