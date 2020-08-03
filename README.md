@@ -4,6 +4,13 @@
 • As a user I want to see all shortened URLs that have been created
 • As a user I want my shortened URL to redirect to the original URL
 
+# Features
+1. Can create short URl for long URL
+2. Using API can show all short url that exists
+3. Can get details for a short url
+4. if already exits dont create new, send old one 
+
+
 
 # INSTALLATION
 Please read SETUP.md file
@@ -37,11 +44,5 @@ Legend:
   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
   OPS: Operations Per Second, computed as 1 / Mean
 
-
-# Features
-1. Can create short URl for long URL
-2. Using API can show all short url that exists
-3. Can get details for a short url
-4. if already exits dont create new, send old one 
 
 
