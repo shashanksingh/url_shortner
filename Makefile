@@ -11,6 +11,9 @@ proto:
 	2to3 src/generated -w -n
 
 build:
+	docker-compose -f docker-compose.dev.yml build
+
+run:
 	docker-compose -f docker-compose.dev.yml up
 
 clean:

@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: url_shortner.Dockerfile
-    depends_on:
+    links:
       - database
     ports:
       - "9090:9090"
