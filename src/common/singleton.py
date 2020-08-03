@@ -1,16 +1,16 @@
 class Singleton(type):
     """
-    The Singleton class can be implemented in different ways in Python. Some
-    possible methods include: base class, decorator, metaclass. We will use the
-    metaclass because it is best suited for this purpose.
+    The Singleton class can be implemented in different ways in Python.
+    Few examples are: base class, decorator, metaclass.
+    This one is based on metaclass and uses class variables
     """
 
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
         """
-        Possible changes to the value of the `__init__` argument do not affect
-        the returned instance.
+        Possible changes to the value of the __init__ argument do not affect
+        the returned instance because we are dealing with class variables
         """
         if cls not in cls._instances:
             instance = super().__call__(*args, **kwargs)

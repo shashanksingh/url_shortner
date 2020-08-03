@@ -21,6 +21,10 @@ class Orm(metaclass=Singleton):
     """
 
     def __init__(self, engine):
+        """
+
+        :param engine: A side effect which would be removed in future
+        """
         if not engine:
             self._engine = create_engine(
                 f"{Constants.MYSQL_PROTOCOL}://{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@"
@@ -38,6 +42,11 @@ class Orm(metaclass=Singleton):
         self.url = base.classes.Urls
 
     def create_short_url(self, long_url: str) -> str:
+        """
+        uses uuid function and creates long url
+        :param long_url: get the long url
+        :return: sshort url
+        """
         if not long_url:
             raise ValidationException()
 
@@ -62,6 +71,11 @@ class Orm(metaclass=Singleton):
         return short_url
 
     def get_short_url_details(self, short_url: str) -> List[Tuple]:
+        """
+        get details of specific short url
+        :param short_url: find ll details of short_url
+        :return: List of the tho points short_url and long url
+        """
         if not short_url:
             raise ValidationException()
         try:
@@ -77,6 +91,10 @@ class Orm(metaclass=Singleton):
         ]
 
     def get_all_short_urls(self) -> List[Tuple]:
+        """
+        get all short urls 
+        :return: List of Short url details
+        """
         try:
             url_objects = self.session.query(self.url).all()
         except IntegrityError as e:
@@ -88,6 +106,11 @@ class Orm(metaclass=Singleton):
         ]
 
     def get_long_url_details(self, long_url: str) -> List[Tuple]:
+        """
+        Used by create_short_url to see if  short url alresdy exists for specific long url
+        :param long_url:
+        :return: short url tuple
+        """
         try:
             url_objects = (
                 self.session.query(self.url)
