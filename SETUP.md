@@ -8,6 +8,7 @@ a. Docker Compose
 
 b. Makefile
 1. Install Python 3.8+
+    https://realpython.com/installing-python/`
 2. Install virtualenv
     `pip install pyenv pyenv-virtualenv`
     `pyenv virtualenv 3.8 url-shortner-3.8`
