@@ -35,7 +35,10 @@ def test_e2e_from_controller_to_database_for_all_functionality():
         )
 
         all_urls = orm.get_all_short_urls()
-        assert orm.get_short_url_details(short_url=all_urls[0][0])[0][1] == "https://MOCKURLONE"
+        assert (
+            orm.get_short_url_details(short_url=all_urls[0][0])[0][1]
+            == "https://MOCKURLONE"
+        )
         assert [x[1] for x in all_urls].sort() == [
             "https://MOCKURLONE",
             "https://MOCKURLTWO",

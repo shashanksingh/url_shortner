@@ -20,12 +20,27 @@ from src.common.exceptions import (
 
 class UrlShortnerServiceController(UrlShortnerServiceServicer):
     def __init__(self):
+        """
+        To create accessor to Singleton ORM object for database access
+        """
         self.orm = Orm()
 
     def ping(self, request, context):
+        """
+        For Health Check
+        :param request: Empty
+        :param context: status code of retun
+        :return: Pong
+        """
         return Pong(message=Constants.OPEN_THE_POD_BAY_DOOR)
 
     def create_short_url(self, request, context):
+        """
+        creates short url from long url pssed in request
+        :param request: Long Url
+        :param context:status code of retun
+        :return: Short Url
+        """
         error_message = None
         short_url = None
         try:
@@ -49,6 +64,12 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
         )
 
     def get_short_url_details(self, request, context):
+        """
+        Get short url details using shsort url passed in request , used by the reedirection service
+        :param request: Short Url
+        :param context: status code of return
+        :return: List of Short Url Details object with length = 1
+        """
         error_message = None
         response = ListOfShortUrlDetails()
 
@@ -75,6 +96,12 @@ class UrlShortnerServiceController(UrlShortnerServiceServicer):
         return response
 
     def get_all_short_urls(self, request, context):
+        """
+        Gets all short url's . In future can be optimized to protobuf stream
+        :param request: Empty
+        :param context:status code of return
+        :return: List of Short Url Details object
+        """
         error_message = None
         response = ListOfShortUrlDetails()
 

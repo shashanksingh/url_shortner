@@ -2,7 +2,7 @@ class DatabaseException(BaseException):
     pass
 
 
-class FieldAlreadyExists(DatabaseException):
+class FieldAlreadyExists(BaseException):
     pass
 
 
