@@ -23,7 +23,26 @@ b. Makefile
     `make run_redirection_service`
     `make run_clients`    
         
-
-`
-
 5. Everything is now up and running
+
+
+To Run Tests
+`pyenv activate url-shortner-3.8`
+`make test`
+
+would output something like:
+
+`benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+plugins: mock-3.2.0, benchmark-3.2.3
+collected 4 items                                                                                                                                                                                                                          
+
+tests/test_performance_bechmark.py::test_performance_of_saving_all_graphs_into_storage 
+Pulling image mysql:8.0.21
+⠼
+Container started:  ed2b0488ef
+Waiting to be ready...
+⠧      FAILED
+tests/test_url_shortner_service_controller.py::test_create_short_url 
+Pulling image mysql:8.0.21
+⠴
+Container started:  2f4a18c176`

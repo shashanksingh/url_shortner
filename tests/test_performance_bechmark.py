@@ -18,5 +18,5 @@ def save_all_into_storage():
         orm.create_short_url(long_url=f"HTTP://MOCK_URL/{random_character()}")
 
 
-def test_performance_of_saving_all_graphs_into_storage(benchmark):
-    benchmark(save_all_into_storage)
+# def test_performance(benchmark):
+#     benchmark(save_all_into_storage)

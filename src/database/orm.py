@@ -20,7 +20,7 @@ class Orm(metaclass=Singleton):
     A singleton class to access data from database
     """
 
-    def __init__(self, engine: None):
+    def __init__(self, engine):
         if not engine:
             self._engine = create_engine(
                 f"{Constants.MYSQL_PROTOCOL}://{Constants.MYSQL_USER_NAME}:{Constants.MYSQL_PASSWORD}@"
@@ -29,7 +29,6 @@ class Orm(metaclass=Singleton):
             )
         else:
             self._engine = engine
-
         session_object = sessionmaker(bind=self._engine)
 
         base = automap_base()
