@@ -5,37 +5,38 @@
 • As a user I want my shortened URL to redirect to the original URL
 
 
-# Aim
-
-Use Cases I want to test out with this
-1. PROTOBUF and GRPC based api
-2. REST/JSON 
-3. MYSQL ??
-4. 
-
-
 # Architecture
 1. Microservices talk to each other through GRPC / Proto 3
 2. Separation of concern is implemented on service level
-3.
+3. Pros of
 
 
-# Future
-1. User GRPC Web Proxy to automatically generate json api from proto descriptions
+# Future to handle load
+1. Use GRPC Web Proxy to automatically generate json api from proto descriptions. https://github.com/grpc/grpc-web
 2. Cacheing Using Redis
 3. Production/Dev split
 4. connect to config server and save config in consul
-5. 
+5. Sharding on mysql database
 
 # DB performance
-Do load tests
+Do load tests result
+
+-------------------------------------------- benchmark: 1 tests --------------------------------------------
+Name (time in ms)        Min     Max    Mean  StdDev  Median     IQR  Outliers       OPS  Rounds  Iterations
+------------------------------------------------------------------------------------------------------------
+test_performance      1.5208  8.3256  4.0971  2.2813  5.4996  4.2660      14;0  244.0771      29           1
+------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
 
 
 # Features
 1. Can create short URl for long URL
-2. Using API can show 
-3. Mysql s 
-4. if already ecsits dont create new, send old one 
+2. Using API can show all short url that exists
+3. Can get details for a short url
+4. if already exits dont create new, send old one 
 
 
 

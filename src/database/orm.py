@@ -92,7 +92,7 @@ class Orm(metaclass=Singleton):
 
     def get_all_short_urls(self) -> List[Tuple]:
         """
-        get all short urls 
+        get all short urls
         :return: List of Short url details
         """
         try:
