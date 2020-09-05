@@ -9,7 +9,14 @@
 2. Using API can show all short url that exists
 3. Can get details for a short url
 4. if already exits dont create new, send old one 
+5. Test : E2E test on controller using test container , GRPC is comes with self test so no need to test that.
+6. 
 
+
+Todo :
+1. Get everything running with docker compose
+2. generate a UI ?????
+3. Caching ???
 
 # INSTALLATION
 Please read SETUP.md file

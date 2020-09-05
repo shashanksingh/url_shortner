@@ -1,4 +1,4 @@
-#THIS is development compose files
+  #THIS is development compose files
 #production one wont have user/password inside yml's
 version: '3.3'
 volumes:
@@ -31,6 +31,7 @@ services:
       - "9090"
     ports:
       - "9090:9090"
+    restart: on-failure
 
   redirection-service:
     image: url-shortner-redirection-service:${TAG:-latest}
@@ -43,6 +44,7 @@ services:
       - "5000"
     ports:
       - "5000:5000"
+    restart: on-failure
 
 
   clients:
