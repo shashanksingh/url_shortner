@@ -47,7 +47,7 @@ Name (time in ms)        Min     Max    Mean  StdDev  Median     IQR  Outliers  
 test_performance      1.5208  8.3256  4.0971  2.2813  5.4996  4.2660      14;0  244.0771      29           1
 ------------------------------------------------------------------------------------------------------------
 
-Legend:
+Legend: 
   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
   OPS: Operations Per Second, computed as 1 / Mean
 

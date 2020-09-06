@@ -20,11 +20,14 @@ services:
       - db-volume:/var/lib/mysql
       - ./src/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
+
   api-service:
     image: url-shortner-api-service:${TAG:-latest}
     build:
       context: .
       dockerfile: url_shortner.Dockerfile
+    depends_on:
+      - database
     links:
       - database
     expose:
@@ -39,6 +42,8 @@ services:
       context: .
       dockerfile: redirection_service.Dockerfile
     depends_on:
+      - api-service
+    links:
       - api-service
     expose:
       - "5000"
